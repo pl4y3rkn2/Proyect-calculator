@@ -132,7 +132,7 @@ def guardar():
         messagebox.showinfo("Error de Guardado", "No se puede guardar datos vacios")
 
 #botones de calculo y salida
-boton = tkinter.Button(ventana, text="Calcular", command = suma, fg="green")
+boton = tkinter.Button(ventana, text="Calcular", command = suma, fg="blue")
 boton.pack()
 boton.place(x=30, y=200, height=15, width =50)
 boton2 = tkinter.Button(ventana, text="Limpiar", command = limpiar, fg="grey")
@@ -141,7 +141,7 @@ boton2.place(x=100, y=200, height=15, width =50)
 boton3 = tkinter.Button(ventana, text="Salir", command = salir, fg="red")
 boton3.pack()
 boton3.place(x=170, y=200, height=15, width =50)
-boton4 = tkinter.Button(ventana, text="Guardar", command = guardar, fg="blue")
+boton4 = tkinter.Button(ventana, text="Guardar", command = guardar, fg="green")
 boton4.pack()
 boton4.place(x=240, y=200, height=15, width =50)
 ventana.mainloop()

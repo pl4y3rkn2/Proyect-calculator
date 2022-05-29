@@ -11,7 +11,7 @@ from datetime import datetime
 
 #Opciones de la ventana
 ventana = tk.Tk() #Ventana como objeto variable
-ventana.title("Total oro Cuentas") #Cambiar el nombre de la ventana
+ventana.title("Calculadora de 3 cuentas") #Cambiar el nombre de la ventana
 ventana.config(width=300, height=250, bg="grey") #tamaño y configuracion de la ventana
 
 #Cajas de texto y label

@@ -27,7 +27,7 @@ label2.place(x=20, y=40)
 label2.config(bg="grey")
 entry2 = ttk.Entry(justify=tk.LEFT, width=10) #caja de texto
 entry2.place(x=65, y=40)
-label3 = Label(ventana, text="meca")
+label3 = Label(ventana, text="Meca")
 label3.pack(side=LEFT)
 label3.place(x=20, y=60)
 label3.config(bg="grey")

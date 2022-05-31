@@ -124,10 +124,13 @@ def guardar():
         #connecion a la base de datos, guardados de datos y otros
         conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")
         cursor = conexion.cursor()
-        sqlsave = "INSERT INTO `datos` (`cuenta1`, `cuenta2`, `cuenta3`, `DG`, `total`, `fecha`) VALUES ('"+entry1.get()+"', '"+entry2.get()+"', '"+entry3.get()+"', '"+entry4.get()+"', '"+totalsinporcentaje.get()+"', '"+datetime.today().strftime('%Y-%m-%d %H:%M:%S')+"');"
-        cursor.execute(sqlsave)
-        conexion.commit()
-        messagebox.showinfo("Datos Guardados", "Datos Guardados en la base de datos")
+        if conexion != "":
+            sqlsave = "INSERT INTO `datos` (`cuenta1`, `cuenta2`, `cuenta3`, `DG`, `total`, `fecha`) VALUES ('"+entry1.get()+"', '"+entry2.get()+"', '"+entry3.get()+"', '"+entry4.get()+"', '"+totalsinporcentaje.get()+"', '"+datetime.today().strftime('%Y-%m-%d %H:%M:%S')+"');"
+            cursor.execute(sqlsave)
+            conexion.commit()
+            messagebox.showinfo("Datos Guardados", "Datos Guardados en la base de datos")
+        else:
+            messagebox.showinfo("Datos Guardados", "Error al conectar a la base de datos")
     else:
         messagebox.showinfo("Error de Guardado", "No se puede guardar datos vacios")
 

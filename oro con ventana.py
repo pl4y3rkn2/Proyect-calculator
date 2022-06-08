@@ -82,6 +82,7 @@ def suma():
     dolarpororo.delete(0,tk.END)
     totalsinporcentaje.insert(0, totalsuma)
     totalconporcentaje.insert(0, round(totalsuma*0.95,2))
+    totalsuma *= 0.95
     dolarpororo.insert(0, round(totalsuma/1000*precio,2))
 
 def limpiar ():

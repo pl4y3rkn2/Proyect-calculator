@@ -59,31 +59,43 @@ labeldolarpororo.place(x=100, y=140)
 labeldolarpororo.config(bg="grey")
 
 # Funcion de Guardado
-f = open("oro.txt")
-entry1.insert(0, int(f.readline()))
-entry2.insert(0, int(f.readline()))
-entry3.insert(0, int(f.readline()))
-entry4.insert(0, float(f.readline()))
-totalsinporcentaje.insert(0, int(f.readline()))
-totalconporcentaje.insert(0, float(f.readline()))
-dolarpororo.insert(0, float(f.readline()))
-f.close()
-
+try:
+    f = open("oro.txt")
+    entry1.insert(0, int(f.readline()))
+    entry2.insert(0, int(f.readline()))
+    entry3.insert(0, int(f.readline()))
+    entry4.insert(0, float(f.readline()))
+    totalsinporcentaje.insert(0, int(f.readline()))
+    totalconporcentaje.insert(0, float(f.readline()))
+    dolarpororo.insert(0, float(f.readline()))    
+    f.close()
+except ValueError:
+    entry1.insert(0, int(0))
+    entry2.insert(0, int(0))
+    entry3.insert(0, int(0))
+    entry4.insert(0, float(0))
+    totalsinporcentaje.insert(0, int(0))
+    totalconporcentaje.insert(0, float(0))
+    dolarpororo.insert(0, float(0))
 # Funcion de botones
 
 def suma():
-    suma1 = int(entry1.get())
-    suma2 = int(entry2.get())
-    suma3 = int(entry3.get())
-    precio = float(entry4.get())
-    totalsuma = suma1+suma2+suma3
-    totalsinporcentaje.delete(0,tk.END)
-    totalconporcentaje.delete(0,tk.END)
-    dolarpororo.delete(0,tk.END)
-    totalsinporcentaje.insert(0, totalsuma)
-    totalconporcentaje.insert(0, round(totalsuma*0.95,2))
-    totalsuma *= 0.95
-    dolarpororo.insert(0, round(totalsuma/1000*precio,2))
+    try:
+        suma1 = int(entry1.get())
+        suma2 = int(entry2.get())
+        suma3 = int(entry3.get())
+        precio = float(entry4.get())
+        totalsuma = suma1+suma2+suma3
+        totalsinporcentaje.delete(0,tk.END)
+        totalconporcentaje.delete(0,tk.END)
+        dolarpororo.delete(0,tk.END)
+        totalsinporcentaje.insert(0, totalsuma)
+        totalconporcentaje.insert(0, round(totalsuma*0.95,2))
+        totalsuma *= 0.95
+        dolarpororo.insert(0, round(totalsuma/1000*precio,2))
+    except ValueError:
+        messagebox.showinfo("Error de Calculo", "solo pueden calcular numero enteros")
+        
 
 def limpiar ():
     pregunta=messagebox.askquestion("Limpiar","¿Deseas Borrar todos los datos?")

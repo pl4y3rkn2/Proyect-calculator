@@ -60,15 +60,15 @@ labeldolarpororo.config(bg="grey")
 
 # Funcion de Guardado
 try:
-    f = open("oro.txt")
-    entry1.insert(0, int(f.readline()))
-    entry2.insert(0, int(f.readline()))
-    entry3.insert(0, int(f.readline()))
-    entry4.insert(0, float(f.readline()))
-    totalsinporcentaje.insert(0, int(f.readline()))
-    totalconporcentaje.insert(0, float(f.readline()))
-    dolarpororo.insert(0, float(f.readline()))    
-    f.close()
+    with open("oro.txt", "r", encoding="utf-8") as f:
+        entry1.insert(0, int(f.readline()))
+        entry2.insert(0, int(f.readline()))
+        entry3.insert(0, int(f.readline()))
+        entry4.insert(0, float(f.readline()))
+        totalsinporcentaje.insert(0, int(f.readline()))
+        totalconporcentaje.insert(0, float(f.readline()))
+        dolarpororo.insert(0, float(f.readline()))    
+        f.close()
 except ValueError:
     entry1.insert(0, int(0))
     entry2.insert(0, int(0))
@@ -124,15 +124,15 @@ def guardar():
     if totalsinporcentaje.get()!="0":
 
         #Guardado de datos local de la aplicacion
-        f=open("oro.txt", "w")
-        f.write(entry1.get()+"\n")
-        f.write(entry2.get()+"\n")
-        f.write(entry3.get()+"\n")
-        f.write(entry4.get()+"\n")
-        f.write(totalsinporcentaje.get()+"\n")
-        f.write(totalconporcentaje.get()+"\n")
-        f.write(dolarpororo.get()+"\n")
-        f.close()
+        with open("oro.txt", "w", encode="utf-8") as f:
+            f.write(entry1.get()+"\n")
+            f.write(entry2.get()+"\n")
+            f.write(entry3.get()+"\n")
+            f.write(entry4.get()+"\n")
+            f.write(totalsinporcentaje.get()+"\n")
+            f.write(totalconporcentaje.get()+"\n")
+            f.write(dolarpororo.get()+"\n")
+            f.close()
 
         #connecion a la base de datos, guardados de datos y otros
         conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")

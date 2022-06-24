@@ -7,6 +7,8 @@ import tkinter
 from tkinter import messagebox
 import mysql.connector
 from datetime import datetime
+from bokeh.plotting import figure, output_file, show
+
 
 #Opciones de la ventana
 ventana = tk.Tk() #Ventana como objeto variable
@@ -146,6 +148,34 @@ def guardar():
     else:
         messagebox.showinfo("Error de Guardado", "No se puede guardar datos vacios")
 
+def grafico():
+    conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")
+    cursor = conexion.cursor()
+
+    cursor.execute("SELECT `cuenta1` FROM `datos`")
+    vals1 = cursor.fetchall()
+    cursor.execute("SELECT `cuenta2` FROM `datos`")
+    vals2 = cursor.fetchall()
+    cursor.execute("SELECT `cuenta3` FROM `datos`")
+    vals3 = cursor.fetchall()
+    cursor.execute("SELECT `DG` FROM `datos`")
+    vals4 = cursor.fetchall()
+    cursor.execute("SELECT `total` FROM `datos`")
+    vals5 = cursor.fetchall()
+    cursor.execute("SELECT `fecha` FROM `datos`")
+    vals6 = cursor.fetchall()
+    conexion.close()
+
+    output_file('graficado_simple.html')
+    fig = figure(title="Datos de oro", x_axis_label="x", y_axis_label="y")
+        
+    fig.line(x=vals6, y=vals1, legend_label="nivek2", color="Blue", line_width=2)
+    fig.line(x=vals6, y=vals2, legend_label="Dosnet", color="red", line_width=2)
+    fig.line(x=vals6, y=vals3, legend_label="meca", color="green", line_width=2)
+    fig.line(x=vals6, y=vals4, legend_label="$/G", color="black", line_width=1)
+    fig.line(x=vals6, y=vals5, legend_label="total", color="grey", line_width=2)
+    show(fig)
+        
 #botones de calculo y salida
 boton = tkinter.Button(ventana, text="Calcular", command = suma, fg="blue")
 boton.pack()
@@ -159,4 +189,7 @@ boton3.place(x=170, y=200, height=15, width =50)
 boton4 = tkinter.Button(ventana, text="Guardar", command = guardar, fg="green")
 boton4.pack()
 boton4.place(x=240, y=200, height=15, width =50)
+boton5 = tkinter.Button(ventana, text="Grafico", command = grafico, fg="blue")
+boton5.pack()
+boton5.place(x=300, y=200, height=15, width =50)
 ventana.mainloop()

@@ -8,7 +8,6 @@ from tkinter import messagebox
 import mysql.connector
 from datetime import datetime
 
-
 #Opciones de la ventana
 ventana = tk.Tk() #Ventana como objeto variable
 ventana.title("Calculadora de 3 cuentas") #Cambiar el nombre de la ventana

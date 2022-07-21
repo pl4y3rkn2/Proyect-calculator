@@ -11,8 +11,9 @@ from bokeh.plotting import figure, output_file, show
 
 
 #Opciones de la ventana
+hora = datetime.now()
 ventana = tk.Tk() #Ventana como objeto variable
-ventana.title("Calculadora de 3 cuentas") #Cambiar el nombre de la ventana
+ventana.title("Calcutest, "+hora.strftime("%H:%M:%S")) #Cambiar el nombre de la ventana
 ventana.config(width=300, height=250, bg="grey") #tamaño y configuracion de la ventana
 
 #Cajas de texto y label

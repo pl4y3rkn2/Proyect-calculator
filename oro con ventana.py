@@ -10,146 +10,160 @@ from datetime import datetime
 from bokeh.plotting import figure, output_file, show
 
 
-#Opciones de la ventana
-hora = datetime.now()
-ventana = tk.Tk() #Ventana como objeto variable
-ventana.title("Calcutest, "+hora.strftime("%H:%M:%S")) #Cambiar el nombre de la ventana
-ventana.config(width=300, height=250, bg="grey") #tamaño y configuracion de la ventana
+#Opciones de la window
+hour = datetime.now()
+window = tk.Tk() #windows on object
+window.title("Calcutest, "+hour.strftime("%H:%M:%S")) #name's window
+window.config(width=300, height=250, bg="grey") #width, height and background
 
-#Cajas de texto y label
-label1 = Label(ventana, text="Nivek2")
+#Text's box y label
+label1 = Label(window, text="Bill 1") #Label
 label1.pack(side=LEFT)
 label1.place(x=20, y=20)
 label1.config(bg="grey")
-entry1 = ttk.Entry(justify=tk.LEFT, width=10) #caja de texto
+
+entry1 = ttk.Entry(justify=tk.LEFT, width=10) #Text's box
 entry1.place(x=65, y=20)
-label2 = Label(ventana, text="Dosnet2")
+
+label2 = Label(window, text="Bill 2") #Label
 label2.pack(side=LEFT)
 label2.place(x=20, y=40)
 label2.config(bg="grey")
-entry2 = ttk.Entry(justify=tk.LEFT, width=10) #caja de texto
+
+entry2 = ttk.Entry(justify=tk.LEFT, width=10) #Text's box
 entry2.place(x=65, y=40)
-label3 = Label(ventana, text="Meca")
+
+label3 = Label(window, text="Bill 3") #Label
 label3.pack(side=LEFT)
 label3.place(x=20, y=60)
 label3.config(bg="grey")
-entry3 = ttk.Entry(justify=tk.LEFT, width=10) #caja de texto
-entry3.place(x=65, y=60)
-label4 = Label(ventana, text="Valor oro/$")
-label4.pack(side=LEFT)
-label4.place(x=150, y=20)
-label4.config(bg="grey")
-entry4 = ttk.Entry(justify=tk.LEFT, width=10) #caja de texto
-entry4.place(x=200, y=20)
-totalsinporcentaje = ttk.Entry(justify=tk.LEFT, width=12, takefocus=False, state="normal") #caja de texto
-totalsinporcentaje.place(x=20, y=100)
-labeltotalsin = Label(ventana, text="Total de oro acumulado")
-labeltotalsin.pack(side=LEFT)
-labeltotalsin.place(x=100, y=100)
-labeltotalsin.config(bg="grey")
-totalconporcentaje = ttk.Entry(justify=tk.LEFT, width=12, takefocus=False, state="normal") #caja de texto
-totalconporcentaje.place(x=20, y=120)
-labeltotalcon = Label(ventana, text="Total de oro menos 5%")
-labeltotalcon.pack(side=LEFT)
-labeltotalcon.place(x=100, y=120)
-labeltotalcon.config(bg="grey")
-dolarpororo = ttk.Entry(justify=tk.LEFT, width=12, takefocus=False, state="normal") #caja de texto
-dolarpororo.place(x=20, y=140)
-labeldolarpororo = Label(ventana, text="$/oro")#label
-labeldolarpororo.pack(side=LEFT)
-labeldolarpororo.place(x=100, y=140)
-labeldolarpororo.config(bg="grey")
 
-# Funcion de Guardado
+entry3 = ttk.Entry(justify=tk.LEFT, width=10) #Text's box
+entry3.place(x=65, y=60)
+
+label4 = Label(window, text="Gold value/$") #Label
+label4.pack(side=LEFT)
+label4.place(x=139, y=20)
+label4.config(bg="grey")
+
+entry4 = ttk.Entry(justify=tk.LEFT, width=10) #Text's box
+entry4.place(x=211, y=20)
+
+subtotal = ttk.Entry(justify=tk.LEFT, width=12, takefocus=False, state="normal") #Text's box
+subtotal.place(x=20, y=100)
+
+labelsubtotal = Label(window, text="Total accumulated gold") #Label
+labelsubtotal.pack(side=LEFT)
+labelsubtotal.place(x=100, y=100)
+labelsubtotal.config(bg="grey")
+
+total = ttk.Entry(justify=tk.LEFT, width=12, takefocus=False, state="normal") #Text's box
+total.place(x=20, y=120)
+
+labeltotal = Label(window, text="Total gold minus 5%") #Label
+labeltotal.pack(side=LEFT)
+labeltotal.place(x=100, y=120)
+labeltotal.config(bg="grey")
+
+dollarforgold = ttk.Entry(justify=tk.LEFT, width=12, takefocus=False, state="normal") #Text's box
+dollarforgold.place(x=20, y=140)
+
+labeldollarforgold = Label(window, text="$/gold") #Label
+labeldollarforgold.pack(side=LEFT)
+labeldollarforgold.place(x=100, y=140)
+labeldollarforgold.config(bg="grey")
+
+# Save Function
 try:
     with open("oro.txt", "r", encoding="utf-8") as f:
         entry1.insert(0, int(f.readline()))
         entry2.insert(0, int(f.readline()))
         entry3.insert(0, int(f.readline()))
         entry4.insert(0, float(f.readline()))
-        totalsinporcentaje.insert(0, int(f.readline()))
-        totalconporcentaje.insert(0, float(f.readline()))
-        dolarpororo.insert(0, float(f.readline()))    
+        subtotal.insert(0, int(f.readline()))
+        total.insert(0, float(f.readline()))
+        dollarforgold.insert(0, float(f.readline()))    
         f.close()
 except ValueError:
     entry1.insert(0, int(0))
     entry2.insert(0, int(0))
     entry3.insert(0, int(0))
     entry4.insert(0, float(0))
-    totalsinporcentaje.insert(0, int(0))
-    totalconporcentaje.insert(0, float(0))
-    dolarpororo.insert(0, float(0))
-# Funcion de botones
+    subtotal.insert(0, int(0))
+    total.insert(0, float(0))
+    dollarforgold.insert(0, float(0))
+# button function
 
-def suma():
+def sum():
     try:
-        suma1 = int(entry1.get())
-        suma2 = int(entry2.get())
-        suma3 = int(entry3.get())
-        precio = float(entry4.get())
-        totalsuma = suma1+suma2+suma3
-        totalsinporcentaje.delete(0,tk.END)
-        totalconporcentaje.delete(0,tk.END)
-        dolarpororo.delete(0,tk.END)
-        totalsinporcentaje.insert(0, totalsuma)
-        totalconporcentaje.insert(0, round(totalsuma*0.95,2))
-        totalsuma *= 0.95
-        dolarpororo.insert(0, round(totalsuma/1000*precio,2))
+        sum1 = int(entry1.get())
+        sum2 = int(entry2.get())
+        sum3 = int(entry3.get())
+        price = float(entry4.get())
+        totalsum = sum1+sum2+sum3
+        subtotal.delete(0,tk.END)
+        total.delete(0,tk.END)
+        dollarforgold.delete(0,tk.END)
+        subtotal.insert(0, totalsum)
+        total.insert(0, round(totalsum*0.95,2))
+        totalsum *= 0.95
+        dollarforgold.insert(0, round(totalsum/1000*price,2))
     except ValueError:
-        messagebox.showinfo("Error de Calculo", "solo pueden calcular numero enteros")
+        messagebox.showinfo("Calculation Error", "can only calculate integers")
         
 
-def limpiar ():
-    pregunta=messagebox.askquestion("Limpiar","¿Deseas Borrar todos los datos?")
-    if pregunta=="yes":
+def clear():
+    question=messagebox.askquestion("Clear","Would you like to Erase all data?")
+    if question=="yes":
         entry1.delete(0,tk.END)
         entry2.delete(0,tk.END)
         entry3.delete(0,tk.END)
         entry4.delete(0,tk.END)
-        totalsinporcentaje.delete(0,tk.END)
-        totalconporcentaje.delete(0,tk.END)
-        dolarpororo.delete(0,tk.END)
+        subtotal.delete(0,tk.END)
+        total.delete(0,tk.END)
+        dollarforgold.delete(0,tk.END)
         entry1.insert(0, int(0))
         entry2.insert(0, int(0))
         entry3.insert(0, int(0))
         entry4.insert(0, int(0))
-        totalsinporcentaje.insert(0, int(0))
-        totalconporcentaje.insert(0, int(0))
-        dolarpororo.insert(0, float(0))
+        subtotal.insert(0, int(0))
+        total.insert(0, int(0))
+        dollarforgold.insert(0, float(0))
 
-def salir ():
-    pregunta=messagebox.askquestion("Salir","¿Deseas cerrar la aplicación?")
-    if pregunta=="yes":
-        ventana.destroy()
+def exit():
+    question=messagebox.askquestion("Quit","Do you want to close the application?")
+    if question=="yes":
+        window.destroy()
     
-def guardar():
-    if totalsinporcentaje.get()!="0":
+def save():
+    if subtotal.get()!="0":
 
-        #Guardado de datos local de la aplicacion
+        #Save local application data
         with open("oro.txt", "w") as f:
             f.write(entry1.get()+"\n")
             f.write(entry2.get()+"\n")
             f.write(entry3.get()+"\n")
             f.write(entry4.get()+"\n")
-            f.write(totalsinporcentaje.get()+"\n")
-            f.write(totalconporcentaje.get()+"\n")
-            f.write(dolarpororo.get()+"\n")
+            f.write(subtotal.get()+"\n")
+            f.write(total.get()+"\n")
+            f.write(dollarforgold.get()+"\n")
             f.close()
 
-            #connecion a la base de datos, guardados de datos y otros
-            conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")
-            cursor = conexion.cursor()
-            if conexion != "":
-                sqlsave = "INSERT INTO `datos` (`cuenta1`, `cuenta2`, `cuenta3`, `DG`, `total`, `fecha`) VALUES ('"+entry1.get()+"', '"+entry2.get()+"', '"+entry3.get()+"', '"+entry4.get()+"', '"+totalsinporcentaje.get()+"', '"+datetime.today().strftime('%Y-%m-%d %H:%M:%S')+"');"
+            #connection to the database, data storage and others
+            try:
+                conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")
+                print(conexion)
+                cursor = conexion.cursor()
+                sqlsave = "INSERT INTO `datos` (`cuenta1`, `cuenta2`, `cuenta3`, `DG`, `total`, `fecha`) VALUES ('"+entry1.get()+"', '"+entry2.get()+"', '"+entry3.get()+"', '"+entry4.get()+"', '"+subtotal.get()+"', '"+datetime.today().strftime('%Y-%m-%d %H:%M:%S')+"');"
                 cursor.execute(sqlsave)
                 conexion.commit()
-                messagebox.showinfo("Datos Guardados", "Datos Guardados en la base de datos")
-            else:
-                messagebox.showinfo("Datos Guardados", "Error al conectar a la base de datos")
+                messagebox.showinfo("Saved Data", "Data Saved in the database\n", conexion)
+            except mysql.connector.errors.InterfaceError:
+                messagebox.showinfo("Data Saved", "Error connecting to database")
     else:
-        messagebox.showinfo("Error de Guardado", "No se puede guardar datos vacios")
+        messagebox.showinfo("Save Error", "Cannot save empty data")
 
-def grafico():
+def graphic():
     conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")
     cursor = conexion.cursor()
 
@@ -167,30 +181,30 @@ def grafico():
     vals6 = cursor.fetchall()
     conexion.close()
 
-    output_file('graficado_simple.html')
-    fig = figure(title="Datos de oro", x_axis_label="x", y_axis_label="y")
+    output_file('simple_save.html')
+    fig = figure(title="Gold's Data", x_axis_label="x", y_axis_label="y")
         
-    fig.line(x=vals6, y=vals1, legend_label="nivek2", color="Blue", line_width=2)
-    fig.line(x=vals6, y=vals2, legend_label="Dosnet", color="red", line_width=2)
-    fig.line(x=vals6, y=vals3, legend_label="meca", color="green", line_width=2)
+    fig.line(x=vals6, y=vals1, legend_label="Bill 1", color="Blue", line_width=2)
+    fig.line(x=vals6, y=vals2, legend_label="Bill 2", color="red", line_width=2)
+    fig.line(x=vals6, y=vals3, legend_label="Bill 3", color="green", line_width=2)
     fig.line(x=vals6, y=vals4, legend_label="$/G", color="black", line_width=1)
-    fig.line(x=vals6, y=vals5, legend_label="total", color="grey", line_width=2)
+    fig.line(x=vals6, y=vals5, legend_label="Total", color="grey", line_width=2)
     show(fig)
         
-#botones de calculo y salida
-boton = tkinter.Button(ventana, text="Calcular", command = suma, fg="blue")
+#calculate and exit buttons
+boton = tkinter.Button(window, text="Calculate", command = sum, fg="blue")
 boton.pack()
 boton.place(x=30, y=200, height=15, width =50)
-boton2 = tkinter.Button(ventana, text="Limpiar", command = limpiar, fg="grey")
+boton2 = tkinter.Button(window, text="Clear", command = clear, fg="grey")
 boton2.pack()
 boton2.place(x=100, y=200, height=15, width =50)
-boton3 = tkinter.Button(ventana, text="Salir", command = salir, fg="red")
+boton3 = tkinter.Button(window, text="Exit", command = exit, fg="red")
 boton3.pack()
 boton3.place(x=170, y=200, height=15, width =50)
-boton4 = tkinter.Button(ventana, text="Guardar", command = guardar, fg="green")
+boton4 = tkinter.Button(window, text="Save", command = save, fg="green")
 boton4.pack()
 boton4.place(x=240, y=200, height=15, width =50)
-boton5 = tkinter.Button(ventana, text="Grafico", command = grafico, fg="blue")
+boton5 = tkinter.Button(window, text="Graphic", command = graphic, fg="blue")
 boton5.pack()
 boton5.place(x=30, y=220, height=15, width =50)
-ventana.mainloop()
+window.mainloop()

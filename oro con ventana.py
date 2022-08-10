@@ -152,14 +152,14 @@ def save():
             #connection to the database, data storage and others
             try:
                 conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")
-                print(conexion)
                 cursor = conexion.cursor()
                 sqlsave = "INSERT INTO `datos` (`cuenta1`, `cuenta2`, `cuenta3`, `DG`, `total`, `fecha`) VALUES ('"+entry1.get()+"', '"+entry2.get()+"', '"+entry3.get()+"', '"+entry4.get()+"', '"+subtotal.get()+"', '"+datetime.today().strftime('%Y-%m-%d %H:%M:%S')+"');"
                 cursor.execute(sqlsave)
                 conexion.commit()
-                messagebox.showinfo("Saved Data", "Data Saved in the database\n", conexion)
+                messagebox.showinfo("Saved Data", "Data Saved in the database")
             except mysql.connector.errors.InterfaceError:
                 messagebox.showinfo("Data Saved", "Error connecting to database")
+                
     else:
         messagebox.showinfo("Save Error", "Cannot save empty data")
 

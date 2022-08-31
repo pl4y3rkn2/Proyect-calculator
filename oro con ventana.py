@@ -5,9 +5,9 @@ import tkinter as tk
 from tkinter import LEFT, Label, Tk, ttk
 import tkinter
 from tkinter import messagebox
-import mysql.connector
+#import mysql.connector
 from datetime import datetime
-from bokeh.plotting import figure, output_file, show
+#from bokeh import figure, output_file, show
 
 
 #Opciones de la window
@@ -151,7 +151,7 @@ def save():
 
             #connection to the database, data storage and others
             try:
-                conexion = mysql.connector.connect(user="root", password="", host="localhost", database="db", port="3306")
+                conexion = mysql.connector(user="root", password="", host="localhost", database="db", port="3306")
                 cursor = conexion.cursor()
                 sqlsave = "INSERT INTO `datos` (`cuenta1`, `cuenta2`, `cuenta3`, `DG`, `total`, `fecha`) VALUES ('"+entry1.get()+"', '"+entry2.get()+"', '"+entry3.get()+"', '"+entry4.get()+"', '"+subtotal.get()+"', '"+datetime.today().strftime('%Y-%m-%d %H:%M:%S')+"');"
                 cursor.execute(sqlsave)

@@ -5,12 +5,12 @@ import tkinter as tk
 from tkinter import LEFT, Label, Tk, ttk
 import tkinter
 from tkinter import messagebox
-#import mysql.connector
+import mysql.connector
 from datetime import datetime
-#from bokeh import figure, output_file, show
+from bokeh import figure, output_file, show
 
 
-#Opciones de la window
+#setting window
 hour = datetime.now()
 window = tk.Tk() #windows on object
 window.title("Calcutest, "+hour.strftime("%H:%M:%S")) #name's window
